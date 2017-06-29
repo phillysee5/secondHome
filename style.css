@@ -1,0 +1,59 @@
+@font-face {
+  font-family: 'bigjohn';
+  src: url('font/bigjohn.ttf') format('truetype');
+}
+
+#nav {
+  display: flex;
+  background-color: #EFEFEF;
+  width: 100%;
+
+}
+
+h1 {
+  font-family: "bigjohn";
+  color: #BCB382;
+  margin-top: 25px;
+  margin-left: 10px;
+}
+
+h2 {
+  color: #BCB382;
+  font-weight: bold;
+  margin-top: 22px;
+  margin-left: 20px;
+}
+
+#nav img {
+  margin-top: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+#links {
+  position: absolute;
+  right: 30px;
+  margin-top: 30px;
+}
+
+#links a {
+  text-decoration: none;
+  color: maroon;
+  font-family: "arial";
+  background-color: white;
+  padding: 4px;
+  border: 1px solid #CECECE;
+  border-radius: 7px;
+
+}
+
+@media (max-width: 750px) {
+  #links {
+    display: none;
+  }
+  #nav {
+    display: block;
+  }
+  #nav img{
+  }
+}
