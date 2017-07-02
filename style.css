@@ -138,9 +138,11 @@ h3 {
 }
 
 .locationdetails {
-  width: 100px;
-  height: 50px;
-  background-color: goldenrod;
+  height: 35px;
+  width: 100%;
+  background-color: #e5e0e0;
+  border: solid 1px grey;
+  margin-bottom: 1px;
 }
 
 
