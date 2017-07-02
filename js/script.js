@@ -1,4 +1,5 @@
 var marker;
+var currentMarker;
 var markers = [];
 var mapMarkers = [
 	{
@@ -98,13 +99,15 @@ function addMarkers(){
 		})
 		markers.push(marker);
 		clickMarker(marker);
+		console.log(marker);
 	};
 }
 
-function clickMarker() {
+function clickMarker(marker) {
 			google.maps.event.addListener(marker, "click", function(){
 			$("#getstarted").hide();
-			$("#locations").append("<div class='locationdetails'></div>")
+			$("#locations").append("<div class='locationdetails'><strong>"+marker.title+"</strong></div>")
+			// currentMarker = marker;
 
 			});
 }
