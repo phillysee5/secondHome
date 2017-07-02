@@ -35,7 +35,7 @@
 h1 {
   font-family: "bigjohn";
   color: #D1B53D;
-  margin-top: 15px;
+  margin-top: 25px;
   margin-left: 10px;
 }
 
@@ -120,7 +120,7 @@ h3 {
   padding-left: 10px;
 }
 
-#cost {
+.cost {
   margin-top: 10px;
   background-color: grey;
   height: 100px;
@@ -140,11 +140,19 @@ h3 {
 .locationdetails {
   height: 35px;
   width: 100%;
-  background-color: #e5e0e0;
-  border: solid 1px grey;
-  margin-bottom: 1px;
+
 }
 
+#dropdown {
+  height: 100px;
+  width: 82%;
+  background-color: #f0f0f0;
+}
+
+.test {
+  width: 100%;
+  background-color: blue;
+}
 
 
 @media (max-width: 750px) {
