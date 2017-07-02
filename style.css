@@ -8,6 +8,11 @@
   src: url('font/poppins.ttf') format('truetype');
 }
 
+@font-face {
+  font-family: 'sosa';
+  src: url('font/sosa.ttf') format('truetype');
+}
+
 .main {
   max-width: 900px;
   margin: 0 auto;
@@ -120,6 +125,25 @@ h3 {
   background-color: grey;
   height: 100px;
 }
+
+#location-select {
+  z-index: 100;
+  position: absolute;
+}
+
+#arrow {
+  font-family: "sosa";
+  font-size: 2.5em;
+  margin-bottom: 0;
+}
+
+.locationdetails {
+  width: 100px;
+  height: 50px;
+  background-color: goldenrod;
+}
+
+
 
 @media (max-width: 750px) {
   #links {

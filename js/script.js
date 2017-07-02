@@ -1,58 +1,59 @@
-function init(){
+var marker;
+var markers = [];
+var mapMarkers = [
+	{
+		lat: -41.296529,
+		lng: 174.764044,
+		title: "Wellington"
+	},
+	{
+		lat: -38.683495,
+		lng: 176.066717,
+		title: "Taupo"
 
-	//All of the options for the map
+	},
+	{
+		lat: -36.874107,
+		lng: 174.721183,
+		title: "Auckland"
+	}
+];
+
+
+
+function init(){
 	var mapOptions = {
-		//Set where the Map starts
 		center:{
-			lat: -41.258166,
-			lng: 174.764943
+			lat: -38.870788,
+			lng: 175.443535
 		},
-		//states what the initial zoom for the map is.
-		zoom: 15,
-		//Turn off all of the User Interface for the Map
-		disableDefaultUI: false,
-		//Turn off the ability to zoom with clicks
-		disableDoubleClickZoom: false,
-		//Turn off the ability to zoom with scroll wheel
+		zoom: 7,
+		disableDefaultUI: true,
+		disableDoubleClickZoom: true,
 		scrollwheel: true,
-		//Turn off the ability to drag the map around
 		draggable: true,
-		//sets the cursor for when we are able to drag
 		draggableCursor: "pointer",
-		//sets the cursor for when we are dragging
-		draggingCursor: "crosshair",
-		//turn on the ability to make the map full screen
-		fullscreenControl: true,
-		//set the background colour of the map
+		draggingCursor: "hand",
+		fullscreenControl: false,
 		backgroundColor: "grey",
-		//turns off the ability to use keyboard
 		keyboardShortcuts: false,
-		//sets where on the map we want the UI element to be
-		mapTypeControlOptions: {
-			position: google.maps.ControlPosition.TOP_CENTER
-		},
-		//This is the section where we can completly style the map
-		//Have a look at the Google Maps API Reference to see everything you can do
 		styles: [
 			{
-				//This is setting the overall style to the whole map
 				stylers:[
-					{ hue: "#d01439" },
+					{ hue: "#D1B53D" },
 					{ saturation: -20 }
 				]
 			},
 			{
-				//Just changing all the roads
-		        featureType: "road",
+				    featureType: "road",
 		        elementType: "geometry",
 		        stylers: [
-		        	{ hue: "#3498db" },
+		        	{ hue: "#7f1419" },
 		        	{ lightness: 0 },
 		          	{ visibility: "none" }
 		        ]
 			},
 			{
-				//Changing all the labels for transits
 				featureType: "transit",
 				elementType: "labels",
 				stylers: [
@@ -61,14 +62,12 @@ function init(){
 				]
 			},
 			{
-				//Changing the water colour
 				featureType: "water",
 				stylers: [
-					{ color: "#16a085"}
+					{ color: "#D1B53D"}
 				]
 			},
 			{
-				//Turning off all of the points of intereset
 				featureType: "poi",
 				stylers: [
 					{visibility: "off"}
@@ -76,9 +75,36 @@ function init(){
 			}
 		]
 	}
-	//Telling the map where you want to render it
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	addMarkers(marker);
+	marker.addListener("click", clickMarker);
 
 }
 
 google.maps.event.addDomListener(window, 'load', init);
+
+
+function addMarkers(){
+		for (var i = 0; i < mapMarkers.length; i++) {
+		marker = new google.maps.Marker({
+			position:{
+				lat: mapMarkers[i].lat,
+				lng: mapMarkers[i].lng
+			},
+			map: map,
+			animation: google.maps.Animation.DROP,
+			title: mapMarkers[i].title,
+			icon: "img/circle.png"
+		})
+		markers.push(marker);
+		clickMarker(marker);
+	};
+}
+
+function clickMarker() {
+			google.maps.event.addListener(marker, "click", function(){
+			$("#getstarted").hide();
+			$("#locations").append("<div class='locationdetails'></div>")
+
+			});
+}
