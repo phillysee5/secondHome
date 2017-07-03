@@ -122,8 +122,14 @@ h3 {
 
 .cost {
   margin-top: 10px;
-  background-color: grey;
-  height: 100px;
+  background-color: #f0f0f0;
+  border: solid 4px #D1B53D;
+  height: 95px;
+}
+
+.cost h3 {
+  margin: 0;
+  margin-left: 10px;
 }
 
 #location-select {
@@ -144,15 +150,34 @@ h3 {
 }
 
 #dropdown {
-  height: 100px;
+  height: 200px;
   width: 82%;
   background-color: #f0f0f0;
+  display: block;
+}
+
+#selectgroup {
+  display: flex;
+  font-size: .8em;
+}
+
+#selectgroup select {
+  position: absolute;
+  margin-top: 5px;
+  right: 200px !important;
+  height: 35px;
+}
+
+#accomodation {
+  margin: 0;
+  background-color: beige;
 }
 
 .test {
   width: 100%;
   background-color: blue;
 }
+
 
 
 @media (max-width: 750px) {

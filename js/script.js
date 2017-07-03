@@ -11,6 +11,7 @@ var currentMarker;
 var transportMode = "DRIVING";
 var directionDisplay;
 var userLocation;
+var markersInUse = [];
 var mapMarkers = [
 	{
 		lat: -41.296529,
@@ -103,7 +104,6 @@ function addMarkers(){
 				lng: mapMarkers[i].lng
 			},
 			map: map,
-			animation: google.maps.Animation.DROP,
 			title: mapMarkers[i].title,
 			icon: "img/circle.png"
 		})
@@ -115,21 +115,41 @@ function addMarkers(){
 function clickMarker(marker) {
 			google.maps.event.addListener(marker, "click", function(){
 			$("#getstarted").hide();
-			if(marker.title == currentMarker.title){
-			} else {
-				$("#locations").append("<div id='accordion' class='locationdetails'><strong>"
-																+marker.title+"</strong><div id='dropdown'><p>Lorem ipsum dolor sit amet</p></div></div>")
 
-																$( "#accordion" ).accordion({
-														      collapsible: true
-														    });
+			if(marker.title === markersInUse.title)
+
+			// for (var j = 0; j < markersInUse.length; j++) { [j]
+			// }
+
+			{
+			}
+
+			else {
+
+				// $("#accordion").append("<h3>two</h3><div></div>");
+				//
+				// $( "#accordion" ).accordion({
+		    //   collapsible: true
+		    // });
+				var newPanel='<h3>'+marker.title+'</h3><div id="dropdown"><div id="selectgroup"><p>size of party</p><select><option>1</option><option>2</option></select></div>'+
+																				'<div id="selectgroup"><p>length of stay</p><select><option>1</option><option>2</option></select></div>'+
+																				'<div id="accomodation"><small>accomodation options</small></div>'+
+				'</div>';
+
+
+
+				$('#accordion').append(newPanel).accordion('destroy').accordion( /* options */ );
+
 
 				currentMarker = marker;
+				markersInUse.push(marker);
+				console.log(markersInUse.title)
 				marker.setIcon("img/house.png");
 				marker.setAnimation(google.maps.Animation.BOUNCE);
 			// showDirection(currentMarker.position, transportMode);
 			}
 			});
+
 }
 
 // function showDirection(location, mode){
