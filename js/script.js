@@ -131,9 +131,15 @@ function clickMarker(marker) {
 				// $( "#accordion" ).accordion({
 		    //   collapsible: true
 		    // });
-				var newPanel='<h3>'+marker.title+'</h3><div id="dropdown"><div id="selectgroup"><p>size of party</p><select><option>1</option><option>2</option></select></div>'+
-																				'<div id="selectgroup"><p>length of stay</p><select><option>1</option><option>2</option></select></div>'+
-																				'<div id="accomodation"><small>accomodation options</small></div>'+
+				var newPanel='<h3>'+marker.title+'</h3><div id="dropdown"><div id="selectgroup"><p>size of party</p><select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
+																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option></select></div>'+
+																				'<div id="accomodation"><small>accomodation options</small>'+
+																				'<div class="options"><ul>'+
+																				'<li class="option">list item<img height="20px" src="http://placehold.it/20x20"><span>$20</span><button>select</button></li>'+
+
+																				'</ul></div>'+
+																				'<span id="close">x</span>'
+																				'</div>'+
 				'</div>';
 
 
@@ -143,7 +149,7 @@ function clickMarker(marker) {
 
 				currentMarker = marker;
 				markersInUse.push(marker);
-				console.log(markersInUse.title)
+				console.log(markersInUse)
 				marker.setIcon("img/house.png");
 				marker.setAnimation(google.maps.Animation.BOUNCE);
 			// showDirection(currentMarker.position, transportMode);

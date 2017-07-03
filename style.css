@@ -83,6 +83,7 @@ h3 {
   width: 45%;
   text-align: right;
   box-sizing: border-box;
+  margin-left: 50px;
 }
 
 #language p {
@@ -101,17 +102,17 @@ h3 {
 #map {
   border: solid 4px #D1B53D;
   height: 500px;
-  width: 400px;
+  width: 420px;
 }
 
 #right-box {
-  width: 49%;
+  width: 420px;
   margin-left: 10px;
 }
 
 #locations {
   background-color: #D8D9D5;
-  height: 400px;
+  height: 395px;
 }
 
 #locations p {
@@ -121,15 +122,32 @@ h3 {
 }
 
 .cost {
-  margin-top: 10px;
+  margin-top: 0px;
   background-color: #f0f0f0;
   border: solid 4px #D1B53D;
-  height: 95px;
+  height: 105px;
 }
 
 .cost h3 {
   margin: 0;
   margin-left: 10px;
+  font-size: 1em;
+}
+
+#total {
+  height: 30px;
+  width: 80px;
+  background-color: white;
+  border: solid #D8D9D5 1px;
+  position: relative;
+  right: -330px;
+  bottom: 11px;
+}
+
+#totalword {
+  position: relative;
+  right: -352px;
+  bottom: -10px;
 }
 
 #location-select {
@@ -150,10 +168,23 @@ h3 {
 }
 
 #dropdown {
-  height: 200px;
+  height: 230px;
   width: 82%;
   background-color: #f0f0f0;
   display: block;
+}
+
+#close {
+  position: relative;
+  left: -30px;
+  bottom: 235px;
+  background-color: grey;
+  color: white;
+  padding-top: 0px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 2px;
+  border-radius: 4px;
 }
 
 #selectgroup {
@@ -162,22 +193,45 @@ h3 {
 }
 
 #selectgroup select {
-  position: absolute;
+  position: relative;
   margin-top: 5px;
-  right: 200px !important;
+  right: -165px !important;
   height: 35px;
 }
 
 #accomodation {
   margin: 0;
-  background-color: beige;
 }
 
-.test {
-  width: 100%;
-  background-color: blue;
+#accomodation small {
+  color: grey;
+  font-size: .7em;
+  margin-left: 10px;
 }
 
+#accomodation ul {
+  text-decoration: none;
+  list-style: none;
+}
+
+#accomodation li {
+  font-size: .7em;
+  margin-left: 0;
+  padding-left: 0;
+}
+
+.options {
+  height: 100px;
+  width: 350px;
+  background-color: white;
+}
+
+.option {
+  display: flex;
+  justify-content: space-between;
+  margin-right: 30px;
+  padding-top: 5px;
+}
 
 
 @media (max-width: 750px) {
