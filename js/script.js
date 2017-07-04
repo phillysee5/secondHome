@@ -130,16 +130,16 @@ function clickMarker(marker) {
 			}
 			else {
 
-				var newPanel='<h3>'+marker.title+'</h3><div id="dropdown"><div id="selectgroup"><p>size of party</p><select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
-																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option></select></div>'+
+				var newPanel='<h3>'+marker.title+'</h3><div id="dropdown"><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
+																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
-																				'<li class="option">Hotel<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button class="hotel" onclick="addhotel()">select</button></li>'+
+																				'<li class="option">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button class="hotel" onclick="addhotel()">select</button></li>'+
 																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20"><span>$30 a night</span><button class="hostel" onclick="addHostel()">select</button></li>'+
-																				'<li class="option">Motel<img height="20px" src="http://placehold.it/20x20"><span>$90 a night</span><button>select</button></li>'+
-																				'<li class="option">House<img height="20px" src="http://placehold.it/20x20"><span>$240 a night</span><button>select</button></li>'+
+																				'<li class="option">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$90 a night</span><button>select</button></li>'+
+																				'<li class="option">House&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$240 a night</span><button>select</button></li>'+
 																				'</ul></div>'+
-																				'<span id="close">x</span>'
+																				'<span id="close" onclick="removeLocation()">x</span>'
 																				'</div>'+
 				'</div>';
 
@@ -162,7 +162,7 @@ console.log(hotelDisplay)
 function addhotel(){
 
   if (hotelDisplay === false){
-	$('#chosen').append('<li id="hoteloption">a hotel</li>');
+	$('#chosen').append('<li id="hoteloption"><span>Hotel</span><span id="length">2 nights</span><span id="hotelcost">$157</span></li>');
   $('.hotel').html('remove');
   hotelDisplay = true;
 } else {
@@ -174,6 +174,10 @@ function addhotel(){
 
 console.log(hotelDisplay)
 
+}
+
+function removeLocation(){
+  console.log('removing stuff')
 }
 // function showDirection(location, mode){
 // 	//If there is already a direction line on the map then remove it
