@@ -89,6 +89,7 @@ function init(){
 	}
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
 	addMarkers(marker);
+
 	marker.addListener("click", clickMarker);
 
 }
@@ -115,28 +116,27 @@ function addMarkers(){
 function clickMarker(marker) {
 			google.maps.event.addListener(marker, "click", function(){
 			$("#getstarted").hide();
-
-			if(marker.title === markersInUse.title)
-
-			// for (var j = 0; j < markersInUse.length; j++) { [j]
-			// }
-
-			{
+			var inuse = false;
+			for (var i = 0; i < markersInUse.length; i++) {
+				if(marker.title == markersInUse[i]){
+					inuse = true;
+					break;
+				}
 			}
+			if(inuse == true)
+			{
 
+			}
 			else {
 
-				// $("#accordion").append("<h3>two</h3><div></div>");
-				//
-				// $( "#accordion" ).accordion({
-		    //   collapsible: true
-		    // });
 				var newPanel='<h3>'+marker.title+'</h3><div id="dropdown"><div id="selectgroup"><p>size of party</p><select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
 																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
-																				'<li class="option">list item<img height="20px" src="http://placehold.it/20x20"><span>$20</span><button>select</button></li>'+
-
+																				'<li class="option">Hotel<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button onclick="addhotel()">select</button></li>'+
+																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20"><span>$30 a night</span><button>select</button></li>'+
+																				'<li class="option">Motel<img height="20px" src="http://placehold.it/20x20"><span>$90 a night</span><button>select</button></li>'+
+																				'<li class="option">House<img height="20px" src="http://placehold.it/20x20"><span>$240 a night</span><button>select</button></li>'+
 																				'</ul></div>'+
 																				'<span id="close">x</span>'
 																				'</div>'+
@@ -148,16 +148,23 @@ function clickMarker(marker) {
 
 
 				currentMarker = marker;
-				markersInUse.push(marker);
+				markersInUse.push(marker.title);
 				console.log(markersInUse)
+				console.log(marker.title)
 				marker.setIcon("img/house.png");
-				marker.setAnimation(google.maps.Animation.BOUNCE);
+				// marker.setAnimation(google.maps.Animation.BOUNCE);
 			// showDirection(currentMarker.position, transportMode);
 			}
 			});
 
 }
 
+
+function addhotel(){
+	console.log('its working')
+	$('#chosen').append('<li>a hotel</li>')
+
+}
 // function showDirection(location, mode){
 // 	//If there is already a direction line on the map then remove it
 // 	if(directionDisplay){
