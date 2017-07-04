@@ -130,7 +130,7 @@ function clickMarker(marker) {
 			}
 			else {
 
-				var newPanel='<h3>'+marker.title+'</h3><div id="dropdown"><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
+				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
 																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
@@ -139,7 +139,7 @@ function clickMarker(marker) {
 																				'<li class="option">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$90 a night</span><button>select</button></li>'+
 																				'<li class="option">House&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$240 a night</span><button>select</button></li>'+
 																				'</ul></div>'+
-																				'<span id="close" onclick="removeLocation()">x</span>'
+																				'<span id="close" onclick="remove'+marker.title+'()">x</span>'
 																				'</div>'+
 				'</div>';
 
@@ -176,8 +176,37 @@ console.log(hotelDisplay)
 
 }
 
-function removeLocation(){
-  console.log('removing stuff')
+function removeTaupo(){
+  $('.Taupo').remove();
+
+
+  var removeItem = 'Taupo';
+  markersInUse = jQuery.grep(markersInUse, function(value) {
+  return value != removeItem;
+  });
+
+}
+
+function removeAuckland(){
+  $('.Auckland').remove();
+
+  var removeItem = 'Auckland';
+  markersInUse = jQuery.grep(markersInUse, function(value) {
+  return value != removeItem;
+  });
+}
+
+function removeWellington(){
+  $('.Wellington').remove();
+
+  var removeItem = 'Wellington';
+  markersInUse = jQuery.grep(markersInUse, function(value) {
+  return value != removeItem;
+  });
+}
+
+function addTotal(){
+  $("#hotelcost")
 }
 // function showDirection(location, mode){
 // 	//If there is already a direction line on the map then remove it
