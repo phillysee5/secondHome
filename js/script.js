@@ -12,6 +12,7 @@ var transportMode = "DRIVING";
 var directionDisplay;
 var userLocation;
 var markersInUse = [];
+var hotelDisplay = false;
 var mapMarkers = [
 	{
 		lat: -41.296529,
@@ -133,8 +134,8 @@ function clickMarker(marker) {
 																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
-																				'<li class="option">Hotel<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button onclick="addhotel()">select</button></li>'+
-																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20"><span>$30 a night</span><button>select</button></li>'+
+																				'<li class="option">Hotel<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button class="hotel" onclick="addhotel()">select</button></li>'+
+																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20"><span>$30 a night</span><button class="hostel" onclick="addHostel()">select</button></li>'+
 																				'<li class="option">Motel<img height="20px" src="http://placehold.it/20x20"><span>$90 a night</span><button>select</button></li>'+
 																				'<li class="option">House<img height="20px" src="http://placehold.it/20x20"><span>$240 a night</span><button>select</button></li>'+
 																				'</ul></div>'+
@@ -149,8 +150,6 @@ function clickMarker(marker) {
 
 				currentMarker = marker;
 				markersInUse.push(marker.title);
-				console.log(markersInUse)
-				console.log(marker.title)
 				marker.setIcon("img/house.png");
 				// marker.setAnimation(google.maps.Animation.BOUNCE);
 			// showDirection(currentMarker.position, transportMode);
@@ -158,11 +157,22 @@ function clickMarker(marker) {
 			});
 
 }
-
+console.log(hotelDisplay)
 
 function addhotel(){
-	console.log('its working')
-	$('#chosen').append('<li>a hotel</li>')
+
+  if (hotelDisplay === false){
+	$('#chosen').append('<li id="hoteloption">a hotel</li>');
+  $('.hotel').html('remove');
+  hotelDisplay = true;
+} else {
+  $('#hoteloption').remove();
+  $('.hotel').html('select')
+  hotelDisplay = false;
+
+}
+
+console.log(hotelDisplay)
 
 }
 // function showDirection(location, mode){
