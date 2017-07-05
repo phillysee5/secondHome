@@ -138,7 +138,7 @@ function clickMarker(marker) {
 			else {
 
 				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" data-location="'+marker.title+'" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select class="partysize" onchange="modifyOptions()"><option>1 person</option><option selected="selected">2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option></select></div>'+
-																				'<div id="selectgroup"><p>length of stay</p><select id="nightsstaying" onchange="multiplyAccomodation()"><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
+																				'<div id="selectgroup"><p>length of stay</p><select class="nightsstaying" onchange="multiplyAccomodation()"><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
 																				'<li class="option hotelinfo">Hotel&nbsp;&nbsp;<img height="20px" src="img/hotel.png">$<span class="hotelcost">157</span></li>'+
@@ -146,7 +146,7 @@ function clickMarker(marker) {
 																				'<li class="option motelinfo">Motel&nbsp;<img height="12px" width="20px" src="img/motel.png">$<span class="motelcost">90</span></li>'+
 																				'<li class="option houseinfo">House&nbsp;<img height="20px"  src="img/houseblack.png">$<span class="housecost">240</span></li>'+
 																				'</ul></div>'+
-                                        '<select id="selector" onchange="accomodationSelect(this)"><option class="placehold">Select an accomodation option</option><option class="hotelselection" value="Hotel">Hotel</option><option class="hostelselection" value="Hostel">Hostel</option><option class="motelselection" value="Motel">Motel</option><option class="houseselection" value="House">House</option></select>'+
+                                        '<select class="selector accomodation" onchange="accomodationSelect(this)"><option class="placehold" value="0">Select an accomodation option</option><option class="hotelselection" value="Hotel">Hotel</option><option class="hostelselection" value="Hostel">Hostel</option><option class="motelselection" value="Motel">Motel</option><option class="houseselection" value="House">House</option></select>'+
 																				'<span class="close" onclick="remove(this)">x</span>'
 																				'</div>'+
 				'</div>';
@@ -208,84 +208,89 @@ function modifyOptions(){
 }
 
 function accomodationSelect(el){
-  console.log( el.value );
-  //get the name of the parent container or marker
 
-  var location;
-  // var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
-  var accomodationtype = el.value;
+  var total = 0;
+  $('#chosen').empty();
 
-  var cost;
+  $('.ui-accordion .ui-accordion-content').each(function(){
+    var location = $(this).attr('data-location');
+    // var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
+    var accomodationtype = $(this).find('select.accomodation').val();
 
-  $('.placehold').hide();
-  $('#accomodations').remove();
-  $('#chosen').append('<li id="accomodations"><span>'+accomodationtype+'</span>&nbsp;<span>'+location+'</span>&nbsp;$<span id="particularcost">'+cost+'</span></li>');
+    if(accomodationtype=='0') return;
+
+    var cost = $(this).find('.options .option.'+accomodationtype.toLowerCase()+'info .'+accomodationtype.toLowerCase()+'cost').text();
+    console.log(cost);
+
+    $('.placehold').hide();
+    $('#chosen').append('<li class="accomodations" data-attribute="'+location+'"><span>'+accomodationtype+'</span>&nbsp;<span>'+location+'</span>&nbsp;$<span id="particularcost">'+cost+'</span></li>');
+
+    total += parseInt(cost);
+  });
+
+  console.log( total );
+  $('#total').empty();
+  $('#total').append(total);
+
 
   multiplyAccomodation();
-
-  if( $('#selector').val() == "Hotel"){
-
-      var buffalo = $('.hotelcost').val()
-      console.log(buffalo);
-      $('#particularcost').append(500);
-  }
-
 
 }
 
 function multiplyAccomodation(){
 
-  hotelCost();
-  hostelCost();
-  motelCost();
-  houseCost();
+  var accomodationTypes = {
+    "hotel": 157,
+    "hostel": 30,
+    "motel": 90,
+    "house": 240
+  };
 
-  function hotelCost(){
-  var hotelcost = 157;
-  $('.hotelcost').empty();
-  nightsstaying = parseInt($('#nightsstaying').val());
-  var newtotal = (nightsstaying *= hotelcost);
-  $('.hotelcost').append(newtotal);
- }
+  $.each(accomodationTypes, function(name, nightcost){
 
- function hostelCost(){
- var hostelcost = 30;
- $('.hostelcost').empty();
- nightsstaying = parseInt($('#nightsstaying').val());
- var newtotal = (nightsstaying *= hostelcost);
- $('.hostelcost').append(newtotal);
-}
+    $('.ui-accordion .ui-accordion-content').each(function(){
+      var nightsstaying = parseInt($(this).find('.nightsstaying').val());
+      var newtotal = (nightsstaying *= nightcost);
+      $(this).find('.'+name+'cost').html(newtotal);
+    });
 
- function motelCost(){
- var motelcost = 90;
- $('.motelcost').empty();
- nightsstaying = parseInt($('#nightsstaying').val());
- var newtotal = (nightsstaying *= motelcost);
- $('.motelcost').append(newtotal);
- }
+  });
 
- function houseCost(){
- var housecost = 240;
- $('.housecost').empty();
- nightsstaying = parseInt($('#nightsstaying').val());
- var newtotal = (nightsstaying *= housecost);
- $('.housecost').append(newtotal);
- }
 }
 
 
 
 
 function remove(el){
-  // console.log(el.parent());
-  var removeItem = el.parentNode.parentNode.dataset.location;
-  // loop over markerInUse array
 
-  
-  Find match
-  change icon
-  remove from array
-  remove from dropdown
+  var removeItem = el.parentNode.parentNode.dataset.location;
+  console.log(el.parentNode.parentNode.dataset.location);
+  // loop over markerInUse array
+  for (var i = 0; i < markersInUse.length; i++) {
+    // Find match
+  if (markersInUse[i] == removeItem){
+  // console.log('match')
+  console.log(markersInUse)
+  // change icon
+  for (var j = 0; j < markers.length; j++) {
+    if(markers[j].title == markersInUse[i]) markers[j].setIcon("img/circle.png");
+  }
+
+  $('.' + markersInUse[i]).remove();
+
+
+  // markersInUse[i].setIcon("img/circle.png");
+  // remove from array
+  var removeFromDom = removeItem;
+  // console.log(removeItem);
+  markersInUse = jQuery.grep(markersInUse, function(value) {
+  return value != removeFromDom;
+  });
+  console.log(markersInUse)
+  // remove from dropdown
+}
+}
+accomodationSelect();
 }
 
 
@@ -323,24 +328,4 @@ function removeAuckland(){
   markersInUse = jQuery.grep(markersInUse, function(value) {
   return value != removeItem;
   });
-}
-
-function removeWellington(){
-  $('.Wellington').remove();
-
-  var removeItem = 'Wellington';
-  markersInUse = jQuery.grep(markersInUse, function(value) {
-  return value != removeItem;
-  });
-}
-
-
-function addTotal(){
-  $('#total').empty();
-  var total = 0;
-  for (var i = 0; i < costs.length; i++) {
-      total += costs[i] << 0;
-  }
-
-  $('#total').append(total);
 }
