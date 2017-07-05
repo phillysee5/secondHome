@@ -146,8 +146,8 @@ function clickMarker(marker) {
 																				'<li class="option motelinfo">Motel&nbsp;<img height="12px" width="20px" src="img/motel.png">$<span class="motelcost">90</span></li>'+
 																				'<li class="option houseinfo">House&nbsp;<img height="20px"  src="img/houseblack.png">$<span class="housecost">240</span></li>'+
 																				'</ul></div>'+
-                                        '<select id="selector" onchange="accomodationSelect()"><option class="placehold">Select an accomodation option</option><option class="hotelselection">Hotel</option><option class="hostelselection">Hostel</option><option class="motelselection">Motel</option><option class="houseselection">House</option></select>'+
-																				'<span id="close" onclick="remove'+marker.title+'()">x</span>'
+                                        '<select id="selector" onchange="accomodationSelect(this)"><option class="placehold">Select an accomodation option</option><option class="hotelselection" value="Hotel">Hotel</option><option class="hostelselection" value="Hostel">Hostel</option><option class="motelselection" value="Motel">Motel</option><option class="houseselection" value="House">House</option></select>'+
+																				'<span class="close" onclick="remove(this)">x</span>'
 																				'</div>'+
 				'</div>';
 
@@ -208,14 +208,18 @@ function modifyOptions(){
 }
 
 function accomodationSelect(el){
-
+  console.log( el.value );
   //get the name of the parent container or marker
+
+  var location;
   // var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
-  accomodationtype = $('#selector').val()
+  var accomodationtype = el.value;
+
+  var cost;
 
   $('.placehold').hide();
   $('#accomodations').remove();
-  $('#chosen').append('<li id="accomodations"><span>'+accomodationtype+'</span>&nbsp;<span>location</span>&nbsp;$<span id="particularcost"></span></li>');
+  $('#chosen').append('<li id="accomodations"><span>'+accomodationtype+'</span>&nbsp;<span>'+location+'</span>&nbsp;$<span id="particularcost">'+cost+'</span></li>');
 
   multiplyAccomodation();
 
@@ -272,6 +276,18 @@ function multiplyAccomodation(){
 
 
 
+function remove(el){
+  // console.log(el.parent());
+  var removeItem = el.parentNode.parentNode.dataset.location;
+  // loop over markerInUse array
+
+  
+  Find match
+  change icon
+  remove from array
+  remove from dropdown
+}
+
 
 function removeTaupo(marker){
 
@@ -279,25 +295,24 @@ function removeTaupo(marker){
   // get the title of the dropdown
   console.log(markersInUse)
   // loop over the markers in use
+
+  //find a match
   for (var i = 0; i < markersInUse.length; i++) {
-  if (markersInUse[i] == "Taupo"){
+  if (markersInUse[i] == marker){
   console.log('we got a match')
 
-  }
-  }
-  //find a match
-
-  //change the icon
-  // marker.setIcon("img/circle.png");
-  //remove it from the inuse array
-
   $('.Taupo').remove();
+  }
+  }
+  //change the icon
+  markersInUse[i].setIcon("img/circle.png");
 
-
+  //remove it from the inuse array
   var removeItem = 'Taupo';
   markersInUse = jQuery.grep(markersInUse, function(value) {
   return value != removeItem;
   });
+
 
 }
 
@@ -329,46 +344,3 @@ function addTotal(){
 
   $('#total').append(total);
 }
-
-
-
-// function showDirection(location, mode){
-// 	//If there is already a direction line on the map then remove it
-// 	if(directionDisplay){
-// 		directionDisplay.setMap(null);
-// 	}
-// 	//Create a new instance of DirectionsService
-// 	var directionService = new google.maps.DirectionsService();
-// 	//Create a new instance of DirectionRendere
-// 	//This draws the lines on the map
-// 	//This was also initialised at the top of the page
-// 	directionDisplay = new google.maps.DirectionsRenderer();
-//
-// 	//set what map you want it to show on
-// 	directionDisplay.setMap(map);
-//
-// 	//The DirectionService only needs origin, destination and travelMode, but there are several other options you can add
-// 	directionService.route({
-// 		//What is the starting place (lat/lng)
-// 		origin: userLocation.position,
-// 		//What is the end place (lat/lng)
-// 		destination: currentMarker.position,
-// 		//How is the user getting there
-// 		travelMode: google.maps.TravelMode[mode],
-// 	}, function(response, status){
-// 		//When it comes back from the server you will get a response and a status
-// 		//you should write a case for all of the different status
-// 		//Have a look at the Google Maps API for all of them
-//
-// 		//If everything is all good
-// 		if(status == "OK"){
-// 			//Show the directions on the map
-// 			directionDisplay.setDirections(response);
-// 		} else if(status == "NOT_FOUND"){
-// 			//If one of the start or end locations werent found
-//
-// 		} else if(status == "ZERO_RESULTS"){
-// 			//If there is no results of how to get to the locations
-// 		}
-// 	});
-// }
