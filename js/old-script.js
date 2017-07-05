@@ -16,8 +16,6 @@ var hotelDisplay = false;
 var hostelDisplay = false;
 var motelDisplay = false;
 var houseDisplay = false;
-
-var nightlycost = [];
 var costs = [];
 
 var mapMarkers = [
@@ -138,15 +136,14 @@ function clickMarker(marker) {
 			else {
 
 				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" data-location="'+marker.title+'" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
-																				'<div id="selectgroup"><p>length of stay</p><select id="nightsstaying" onchange="multiplyAccomodation()"><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
+																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
-																				'<li class="option">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="hotelcost">157</span></li>'+
-																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20">$<span class="hostelcost">30</span></li>'+
-																				'<li class="option">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="motelcost">90</span></li>'+
-																				'<li class="option">House&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="housecost">240</span></li>'+
+																				'<li class="option">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button class="hotel" onclick="addHotel(this)">select</button></li>'+
+																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20"><span>$30 a night</span><button class="hostel" onclick="addHostel()">select</button></li>'+
+																				'<li class="option">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$90 a night</span><button class="motel" onclick="addMotel()">select</button></li>'+
+																				'<li class="option">House&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$240 a night</span><button class="house" onclick="addHouse()">select</button></li>'+
 																				'</ul></div>'+
-                                        '<select id="selector" onchange="accomodationSelect()"><option class="'+marker.title+'Option">Select an accomodation option</option><option>Hotel</option><option>Hostel</option><option>Motel</option><option>House</option></select>'+
 																				'<span id="close" onclick="remove'+marker.title+'()">x</span>'
 																				'</div>'+
 				'</div>';
@@ -164,61 +161,6 @@ function clickMarker(marker) {
 			}
 			});
 
-}
-
-function accomodationSelect(el){
-
-  //get the name of the parent container or marker
-
-  var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
-
-  $('.TaupoOption').hide();
-  $('taupo-accom').empty();
-
-  console.log(forLocation)
-  $('#chosen').append('<li id="taupo-accom"><span>accomodationtype</span>&nbsp;<span>location</span>&nbsp;$<span>cost</span></li>');
-
-  multiplyAccomodation();
-}
-
-function multiplyAccomodation(){
-
-  hotelCost();
-  hostelCost();
-  motelCost();
-  houseCost();
-
-  function hotelCost(){
-  var hotelcost = 157;
-  $('.hotelcost').empty();
-  nightsstaying = parseInt($('#nightsstaying').val());
-  var newtotal = (nightsstaying *= hotelcost);
-  $('.hotelcost').append(newtotal);
- }
-
- function hostelCost(){
- var hostelcost = 30;
- $('.hostelcost').empty();
- nightsstaying = parseInt($('#nightsstaying').val());
- var newtotal = (nightsstaying *= hostelcost);
- $('.hostelcost').append(newtotal);
-}
-
- function motelCost(){
- var motelcost = 90;
- $('.motelcost').empty();
- nightsstaying = parseInt($('#nightsstaying').val());
- var newtotal = (nightsstaying *= motelcost);
- $('.motelcost').append(newtotal);
- }
-
- function houseCost(){
- var housecost = 240;
- $('.housecost').empty();
- nightsstaying = parseInt($('#nightsstaying').val());
- var newtotal = (nightsstaying *= housecost);
- $('.housecost').append(newtotal);
- }
 }
 
 

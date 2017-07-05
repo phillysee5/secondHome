@@ -217,6 +217,11 @@ h3 {
   margin: 0;
 }
 
+#accomodation select {
+  margin-top: 20px;
+  width: 333px;
+}
+
 #accomodation small {
   color: grey;
   font-size: .7em;
