@@ -202,6 +202,8 @@ function modifyOptions(){
   $('.houseinfo').hide();
 
   $('.motelselection').hide();
+  $('.houseselection').hide();
+  $('.hotelselection').hide();
 }
 }
 
@@ -317,11 +319,6 @@ function removeWellington(){
   });
 }
 
-
-
-// var hostelcost = $('#hostelcost').text();
-// var motelcost = $('#motelcost').text();
-// var housecost = $('#houselcost').text();
 
 function addTotal(){
   $('#total').empty();
