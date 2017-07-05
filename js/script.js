@@ -141,10 +141,10 @@ function clickMarker(marker) {
 																				'<div id="selectgroup"><p>length of stay</p><select id="nightsstaying" onchange="multiplyAccomodation()"><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
-																				'<li class="option hotelinfo">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="hotelcost">157</span></li>'+
-																				'<li class="option hostelinfo">Hostel<img height="20px" src="http://placehold.it/20x20">$<span class="hostelcost">30</span></li>'+
-																				'<li class="option motelinfo">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="motelcost">90</span></li>'+
-																				'<li class="option houseinfo">House&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="housecost">240</span></li>'+
+																				'<li class="option hotelinfo">Hotel&nbsp;&nbsp;<img height="20px" src="img/hotel.png">$<span class="hotelcost">157</span></li>'+
+																				'<li class="option hostelinfo">Hostel<img height="20px" src="img/hostel.png">$<span class="hostelcost">30</span></li>'+
+																				'<li class="option motelinfo">Motel&nbsp;<img height="12px" width="20px" src="img/motel.png">$<span class="motelcost">90</span></li>'+
+																				'<li class="option houseinfo">House&nbsp;<img height="20px"  src="img/houseblack.png">$<span class="housecost">240</span></li>'+
 																				'</ul></div>'+
                                         '<select id="selector" onchange="accomodationSelect()"><option class="placehold">Select an accomodation option</option><option class="hotelselection">Hotel</option><option class="hostelselection">Hostel</option><option class="motelselection">Motel</option><option class="houseselection">House</option></select>'+
 																				'<span id="close" onclick="remove'+marker.title+'()">x</span>'
