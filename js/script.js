@@ -137,16 +137,16 @@ function clickMarker(marker) {
 			}
 			else {
 
-				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" data-location="'+marker.title+'" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
+				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" data-location="'+marker.title+'" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select class="partysize" onchange="modifyOptions()"><option>1 person</option><option selected="selected">2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option></select></div>'+
 																				'<div id="selectgroup"><p>length of stay</p><select id="nightsstaying" onchange="multiplyAccomodation()"><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
-																				'<li class="option">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="hotelcost">157</span></li>'+
-																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20">$<span class="hostelcost">30</span></li>'+
-																				'<li class="option">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="motelcost">90</span></li>'+
-																				'<li class="option">House&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="housecost">240</span></li>'+
+																				'<li class="option hotelinfo">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="hotelcost">157</span></li>'+
+																				'<li class="option hostelinfo">Hostel<img height="20px" src="http://placehold.it/20x20">$<span class="hostelcost">30</span></li>'+
+																				'<li class="option motelinfo">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="motelcost">90</span></li>'+
+																				'<li class="option houseinfo">House&nbsp;<img height="20px" src="http://placehold.it/20x20">$<span class="housecost">240</span></li>'+
 																				'</ul></div>'+
-                                        '<select id="selector" onchange="accomodationSelect()"><option class="'+marker.title+'Option">Select an accomodation option</option><option>Hotel</option><option>Hostel</option><option>Motel</option><option>House</option></select>'+
+                                        '<select id="selector" onchange="accomodationSelect()"><option class="placehold">Select an accomodation option</option><option class="hotelselection">Hotel</option><option class="hostelselection">Hostel</option><option class="motelselection">Motel</option><option class="houseselection">House</option></select>'+
 																				'<span id="close" onclick="remove'+marker.title+'()">x</span>'
 																				'</div>'+
 				'</div>';
@@ -166,19 +166,65 @@ function clickMarker(marker) {
 
 }
 
+
+function modifyOptions(){
+  console.log('party size changed')
+  if(parseInt($('.partysize').val()) == 1){
+  console.log('one man show')
+  $('.motelinfo').hide();
+  $('.hotelinfo').show();
+  $('.hostelinfo').show();
+  $('.houseinfo').show();
+
+
+  $('.motelselection').hide();
+  }
+  if (parseInt($('.partysize').val()) > 1){
+  $('.hotelinfo').show();
+  $('.hostelinfo').show();
+  $('.motelinfo').show();
+  $('.houseinfo').show();
+
+
+  $('.motelselection').show();
+  $('.hotelselection').show();
+  $('.hostelselection').show();
+  $('.houseselection').show();
+  }
+  if (parseInt($('.partysize').val()) > 2){
+  $('.hotelinfo').hide();
+
+  $('.hotelselection').hide();
+  $('.motelselection').show();
+  }
+  if (parseInt($('.partysize').val()) > 4){
+  $('.motelinfo').hide();
+  $('.houseinfo').hide();
+
+  $('.motelselection').hide();
+}
+}
+
 function accomodationSelect(el){
 
   //get the name of the parent container or marker
+  // var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
+  accomodationtype = $('#selector').val()
 
-  var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
-
-  $('.TaupoOption').hide();
-  $('taupo-accom').empty();
-
-  console.log(forLocation)
-  $('#chosen').append('<li id="taupo-accom"><span>accomodationtype</span>&nbsp;<span>location</span>&nbsp;$<span>cost</span></li>');
+  $('.placehold').hide();
+  $('#accomodations').remove();
+  $('#chosen').append('<li id="accomodations"><span>'+accomodationtype+'</span>&nbsp;<span>location</span>&nbsp;$<span id="particularcost"></span></li>');
 
   multiplyAccomodation();
+
+  if( $('#selector').val() == "Hotel"){
+
+      var buffalo = $('.hotelcost').val()
+      console.log(buffalo);
+      $('#particularcost').append(500);
+  }
+
+
 }
 
 function multiplyAccomodation(){
@@ -222,116 +268,6 @@ function multiplyAccomodation(){
 }
 
 
-function addHotel(el){
-
-  var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
-
-  if (hotelDisplay === false){
-	$('#chosen').append('<li id="hoteloption-'+forLocation+'"><span>Hotel&nbsp;&nbsp;</span><span id="length">1 night</span><span class="costs">$</span><span class="costs" id="hotelcost">157</span></li>');
-  $('[data-location="'+forLocation+'"] .hotel').html('remove');
-
-  var hotelcost = $('#hotelcost').text();
-  costs.push(hotelcost)
-  addTotal();
-
-  hotelDisplay = true;
-} else {
-  $('#hoteloption').remove();
-  $('.hotel').html('select')
-
-
-  var removeItem = 157;
-  costs = jQuery.grep(costs, function(value) {
-    return value != removeItem;
-  });
-  console.log(costs)
-  addTotal();
-  hotelDisplay = false;
-
-}
-}
-
-function addHostel(){
-
-  if (hostelDisplay === false){
-	$('#chosen').append('<li id="hosteloption"><span>Hostel</span><span id="length">1 night</span><span class="costs">$</span><span class="costs" id="hostelcost">30</span></li>');
-  $('.hostel').html('remove');
-
-  var hostelcost = $('#hostelcost').text();
-  costs.push(hostelcost)
-  addTotal();
-
-  hostelDisplay = true;
-} else {
-  $('#hosteloption').remove();
-  $('.hostel').html('select')
-
-  var removeItem = 30;
-  costs = jQuery.grep(costs, function(value) {
-    return value != removeItem;
-  });
-  console.log(costs)
-  addTotal();
-
-  hostelDisplay = false;
-
-}
-}
-
-function addMotel(){
-
-  if (motelDisplay === false){
-	$('#chosen').append('<li id="moteloption"><span>House</span><span id="length">1 night</span><span class="costs">$</span><span class="costs" id="motelcost">90</span></li>');
-  $('.motel').html('remove');
-
-  var motelcost = $('#motelcost').text();
-  costs.push(motelcost)
-  addTotal();
-
-  motelDisplay = true;
-} else {
-  $('#moteloption').remove();
-  $('.motel').html('select')
-
-  var removeItem = 90;
-  costs = jQuery.grep(costs, function(value) {
-    return value != removeItem;
-  });
-  console.log(costs)
-  addTotal();
-
-  motelDisplay = false;
-
-}
-}
-
-function addHouse(){
-
-  if (houseDisplay === false){
-	$('#chosen').append('<li id="houseoption"><span>House</span><span id="length">1 night</span><span class="costs">$</span><span class="costs" id="housecost">240</span></li>');
-  $('.house').html('remove');
-
-  var housecost = $('#housecost').text();
-  costs.push(housecost)
-  addTotal();
-
-  houseDisplay = true;
-
-} else {
-  $('#houseoption').remove();
-  $('.house').html('select')
-
-  var removeItem = 240;
-  costs = jQuery.grep(costs, function(value) {
-    return value != removeItem;
-  });
-  console.log(costs)
-  addTotal();
-
-  houseDisplay = false;
-}
-}
-
 
 
 
@@ -344,7 +280,6 @@ function removeTaupo(marker){
   for (var i = 0; i < markersInUse.length; i++) {
   if (markersInUse[i] == "Taupo"){
   console.log('we got a match')
-
 
   }
   }
@@ -397,6 +332,9 @@ function addTotal(){
 
   $('#total').append(total);
 }
+
+
+
 // function showDirection(location, mode){
 // 	//If there is already a direction line on the map then remove it
 // 	if(directionDisplay){
