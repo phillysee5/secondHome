@@ -135,11 +135,11 @@ function clickMarker(marker) {
 			}
 			else {
 
-				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" data-location="'+marker.title+'" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
+				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select><option>1 person</option><option>2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option><option>7 people</option><option>8 people</option></select></div>'+
 																				'<div id="selectgroup"><p>length of stay</p><select><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
-																				'<li class="option">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button class="hotel" onclick="addHotel(this)">select</button></li>'+
+																				'<li class="option">Hotel&nbsp;&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$157 a night</span><button class="hotel" onclick="addHotel()">select</button></li>'+
 																				'<li class="option">Hostel<img height="20px" src="http://placehold.it/20x20"><span>$30 a night</span><button class="hostel" onclick="addHostel()">select</button></li>'+
 																				'<li class="option">Motel&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$90 a night</span><button class="motel" onclick="addMotel()">select</button></li>'+
 																				'<li class="option">House&nbsp;<img height="20px" src="http://placehold.it/20x20"><span>$240 a night</span><button class="house" onclick="addHouse()">select</button></li>'+
@@ -164,13 +164,11 @@ function clickMarker(marker) {
 }
 
 
-function addHotel(el){
-
-  var forLocation = $(el).parent().parent().parent().parent().parent().attr("data-location");
+function addHotel(){
 
   if (hotelDisplay === false){
-	$('#chosen').append('<li id="hoteloption-'+forLocation+'"><span>Hotel&nbsp;&nbsp;</span><span id="length">1 night</span><span class="costs">$</span><span class="costs" id="hotelcost">157</span></li>');
-  $('[data-location="'+forLocation+'"] .hotel').html('remove');
+	$('#chosen').append('<li id="hoteloption"><span>Hotel&nbsp;&nbsp;</span><span id="length">1 night</span><span class="costs">$</span><span class="costs" id="hotelcost">157</span></li>');
+  $('.hotel').html('remove');
 
   var hotelcost = $('#hotelcost').text();
   costs.push(hotelcost)
