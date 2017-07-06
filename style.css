@@ -182,7 +182,7 @@ h3 {
  .close {
   position: relative;
   left: -30px;
-  bottom: 235px;
+  bottom: 270px;
   background-color: grey;
   color: white;
   padding-top: 0px;
@@ -277,6 +277,10 @@ h3 {
 #length {
   position: relative;
   left: 100px;
+}
+
+.accomodations span{
+  margin-left: 40px;
 }
 
 

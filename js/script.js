@@ -47,7 +47,7 @@ function init(){
 			lat: -38.870788,
 			lng: 175.443535
 		},
-		zoom: 7,
+		zoom: 6,
 		disableDefaultUI: true,
 		disableDoubleClickZoom: true,
 		scrollwheel: true,
@@ -223,7 +223,7 @@ function accomodationSelect(el){
     console.log(cost);
 
     $('.placehold').hide();
-    $('#chosen').append('<li class="accomodations" data-attribute="'+location+'"><span>'+accomodationtype+'</span>&nbsp;<span>'+location+'</span>&nbsp;$<span id="particularcost">'+cost+'</span></li>');
+    $('#chosen').append('<li class="accomodations" data-attribute="'+location+'"><span>'+accomodationtype+'</span>&nbsp;<span>'+location+'</span>&nbsp;<span id="particularcost">$'+cost+'</span></li>');
 
     total += parseInt(cost);
   });
