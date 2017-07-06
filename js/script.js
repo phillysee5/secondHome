@@ -138,7 +138,7 @@ function clickMarker(marker) {
 			else {
 
 				var newPanel='<h3 class='+marker.title+'>'+marker.title+'</h3><div id="dropdown" data-location="'+marker.title+'" class='+marker.title+'><div id="selectgroup"><p>size of party</p>&nbsp;&nbsp;<select class="partysize" onchange="modifyOptions()"><option>1 person</option><option selected="selected">2 people</option><option>3 people</option><option>4 people</option><option>5 people</option><option>6 people</option></select></div>'+
-																				'<div id="selectgroup"><p>length of stay</p><select class="nightsstaying" onchange="multiplyAccomodation()"><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
+																				'<div id="selectgroup"><p>length of stay</p><select class="nightsstaying" onchange="multiplyAccomodation(this)"><option>1 night</option><option>2 nights</option><option>3 nights</option><option>4 nights</option><option>5 nights</option><option>6 nights</option><option>7 nights</option><option>8 nights</option><option>9 nights</option><option>10 nights</option><option>11 nights</option><option>12 nights</option><option>13 nights</option><option>14 nights</option></select></div>'+
 																				'<div id="accomodation"><small>accomodation options</small>'+
 																				'<div class="options"><ul>'+
 																				'<li class="option hotelinfo">Hotel&nbsp;&nbsp;<img height="20px" src="img/hotel.png">$<span class="hotelcost">157</span></li>'+
@@ -167,15 +167,16 @@ function clickMarker(marker) {
 }
 
 
+// function changeOptions(){
+//   console.log('hi there');
+// }
+
 function modifyOptions(){
-  console.log('party size changed')
   if(parseInt($('.partysize').val()) == 1){
-  console.log('one man show')
   $('.motelinfo').hide();
   $('.hotelinfo').show();
   $('.hostelinfo').show();
   $('.houseinfo').show();
-
 
   $('.motelselection').hide();
   }
@@ -206,6 +207,7 @@ function modifyOptions(){
   $('.hotelselection').hide();
 }
 }
+
 
 function accomodationSelect(el){
 
@@ -245,7 +247,6 @@ function multiplyAccomodation(){
     "motel": 90,
     "house": 240
   };
-
   $.each(accomodationTypes, function(name, nightcost){
 
     $('.ui-accordion .ui-accordion-content').each(function(){
@@ -255,77 +256,28 @@ function multiplyAccomodation(){
     });
 
   });
-
-}
-
-
-
+  }
 
 function remove(el){
-
+  // find the name of the parent element
   var removeItem = el.parentNode.parentNode.dataset.location;
-  console.log(el.parentNode.parentNode.dataset.location);
   // loop over markerInUse array
   for (var i = 0; i < markersInUse.length; i++) {
     // Find match
   if (markersInUse[i] == removeItem){
-  // console.log('match')
-  console.log(markersInUse)
-  // change icon
+    // change icon
   for (var j = 0; j < markers.length; j++) {
     if(markers[j].title == markersInUse[i]) markers[j].setIcon("img/circle.png");
   }
-
+  // remove from the array
   $('.' + markersInUse[i]).remove();
 
-
-  // markersInUse[i].setIcon("img/circle.png");
-  // remove from array
-  var removeFromDom = removeItem;
-  // console.log(removeItem);
-  markersInUse = jQuery.grep(markersInUse, function(value) {
-  return value != removeFromDom;
-  });
-  console.log(markersInUse)
-  // remove from dropdown
+    // remove from DOM
+  // var removeFromDom = removeItem;
+  // markersInUse = jQuery.grep(markersInUse, function(value) {
+  // return value != removeFromDom;
+  // });
 }
 }
 accomodationSelect();
-}
-
-
-function removeTaupo(marker){
-
-  marker = "Taupo"
-  // get the title of the dropdown
-  console.log(markersInUse)
-  // loop over the markers in use
-
-  //find a match
-  for (var i = 0; i < markersInUse.length; i++) {
-  if (markersInUse[i] == marker){
-  console.log('we got a match')
-
-  $('.Taupo').remove();
-  }
-  }
-  //change the icon
-  markersInUse[i].setIcon("img/circle.png");
-
-  //remove it from the inuse array
-  var removeItem = 'Taupo';
-  markersInUse = jQuery.grep(markersInUse, function(value) {
-  return value != removeItem;
-  });
-
-
-}
-
-function removeAuckland(){
-  $('.Auckland').remove();
-
-  var removeItem = 'Auckland';
-  markersInUse = jQuery.grep(markersInUse, function(value) {
-  return value != removeItem;
-  });
 }
